@@ -27,5 +27,29 @@ RSpec.describe "GameOfLife" do
         end
       end
     end
+    
+    context "a living cell on the edge of the board" do
+      context "with zero living cells around" do
+        let(:board) { [
+          [1, 0, 0],
+          [0, 0, 0],
+          [0, 0, 0]
+        ]}
+        
+        it "dies at next gen" do
+          game_of_life = GameOfLife.new(board)
+  
+          game_of_life.next_gen
+  
+          expected_board = [
+            [0, 0, 0],
+            [0, 0, 0],
+            [0, 0, 0]
+          ]
+  
+          expect(game_of_life.board).to eq(expected_board)
+        end
+      end
+    end
   end
 end
