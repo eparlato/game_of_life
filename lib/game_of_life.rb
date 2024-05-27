@@ -8,7 +8,7 @@ class GameOfLife
   
   def next_gen
     @board.each_with_index do |row, row_index|
-      row.each_with_index do |cell, column_index|
+      row.each_index do |column_index|
         cell_neighbours = neighbours_for_cell_at_pos(row_index, column_index)
         
         if cell_neighbours.count(1) == 0
@@ -20,7 +20,7 @@ class GameOfLife
   
   private
   
-  def neighbours_for_cell_at_pos(row_coordinate, column_coordinate)
+  def   neighbours_for_cell_at_pos(row_coordinate, column_coordinate)
     neighbours = []
 
     neighbours << cell_value_at_position(row_coordinate - 1, column_coordinate - 1) 
