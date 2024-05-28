@@ -9,8 +9,18 @@ class Cell
   end
   
   def tick
-    if neighbours_status.count(1) == 0
-      @status = 0
+    if @status == 1
+      if neighbours_status.count(1) <= 1
+        @status = 0
+      elsif neighbours_status.count(1) == 2 || neighbours_status.count(1) == 3
+        @status = 1       
+      elsif neighbours_status.count(1) >= 4
+        @status = 0
+      end
+    end
+    
+    if @status == 0 && neighbours_status.count(1) == 3
+      @status = 1
     end
   end
 end

@@ -9,5 +9,3 @@
   with 2 living cells around => cell dies
   with 3 living cells around => cell lives
   with 4 living cells around => cell dies
-
-cell in one corner scenario
