@@ -3,7 +3,6 @@
 require "universe"
 require "cell"
 class GameOfLife
-  attr_reader :board
   def initialize(board)
     @board = board
     @universe = Universe.new(board)
@@ -13,7 +12,9 @@ class GameOfLife
     @universe.assign_neighbours_status_to_cells
     
     @universe.tick
-    
-    @board = @universe.cells_status
+  end
+  
+  def board
+    @universe.cells_status
   end
 end
