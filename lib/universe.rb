@@ -3,7 +3,7 @@
 require "cell"
 
 class Universe
-  def initialize(seed)
+  def initialize(cells_status_board)
     @structure = []
     
     board_universe_status_map = {
@@ -11,7 +11,7 @@ class Universe
       1 => :alive
     }
     
-    seed.each do |row|
+    cells_status_board.each do |row|
       universe_row = []
       row.each do |cell_value|
         universe_row << Cell.new(board_universe_status_map[cell_value])
@@ -38,7 +38,7 @@ class Universe
     end
   end
   
-  def cells_status
+  def cells_status_board
     board = []
     universe_board_status_map = {
       :dead => 0,

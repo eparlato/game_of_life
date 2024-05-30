@@ -3,9 +3,8 @@
 require "universe"
 require "cell"
 class GameOfLife
-  def initialize(board)
-    @board = board
-    @universe = Universe.new(board)
+  def initialize(initial_cells_status_board)
+    @universe = Universe.new(initial_cells_status_board)
   end
   
   def next_gen
@@ -14,7 +13,7 @@ class GameOfLife
     @universe.tick
   end
   
-  def board
-    @universe.cells_status
+  def cells_status_board
+    @universe.cells_status_board
   end
 end
