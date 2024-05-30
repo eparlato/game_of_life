@@ -3,6 +3,7 @@
 require "cell"
 
 class Universe
+  attr_reader :structure
   def initialize(cells_status_board)
     @structure = []
     
@@ -76,10 +77,14 @@ class Universe
   end
 
   def cell_value_at_position(row_index, column_index)
-    if @structure[row_index].nil? || @structure[row_index][column_index].nil?
+    if out_of_bounds?(row_index, column_index)
       return :dead
     end
 
     return @structure[row_index][column_index].status
+  end
+  
+  def out_of_bounds?(row_index, column_index)
+    row_index < 0 || row_index >= @structure.size || column_index < 0 || column_index >= @structure[row_index].size
   end
 end
