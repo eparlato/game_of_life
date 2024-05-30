@@ -79,6 +79,36 @@ RSpec.describe Cell do
         subject.neighbours_status = neighbours_status
       end
       
+      context "when there are no living neighbours" do
+        let(:neighbours_status) { [ 0, 0, 0, 0, 0, 0, 0, 0 ] }
+        
+        it "sets status to death" do
+          subject.tick
+          
+          expect(subject.status).to eq(0)
+        end
+      end
+      
+      context "when there is one living neighbours" do
+        let(:neighbours_status) { [ 0, 0, 0, 0, 0, 0, 0, 1 ] }
+        
+        it "sets status to death" do
+          subject.tick
+
+          expect(subject.status).to eq(0)
+        end
+      end
+      
+      context "when there are two living neighbours" do
+        let(:neighbours_status) { [ 0, 0, 0, 1, 0, 0, 1, 0 ] }
+        
+        it "set status to death" do
+          subject.tick
+          
+          expect(subject.status).to eq(0)
+        end
+      end
+      
       context "when there are three living neighbours" do
         let(:neighbours_status) { [ 1, 0, 1, 0, 0, 0, 0, 1 ] }
         
@@ -86,6 +116,26 @@ RSpec.describe Cell do
           subject.tick
           
           expect(subject.status).to eq(1)
+        end
+      end
+      
+      context "when there are four living neighbours" do
+        let(:neighbours_status) { [ 0, 0, 1, 1, 1, 0, 1, 0 ] }
+
+        it "set status to death" do
+          subject.tick
+
+          expect(subject.status).to eq(0)
+        end
+      end
+      
+      context "when there are more than four living neighbours" do
+        let(:neighbours_status) { [ 1, 1, 1, 1, 1, 1, 1, 1 ] }
+
+        it "set status to death" do
+          subject.tick
+
+          expect(subject.status).to eq(0)
         end
       end
     end
