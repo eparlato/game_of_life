@@ -9,18 +9,18 @@ class Cell
   end
   
   def tick
-    if @status == 1
-      if neighbours_status.count(1) <= 1
-        @status = 0
-      elsif neighbours_status.count(1) == 2 || neighbours_status.count(1) == 3
-        @status = 1       
-      elsif neighbours_status.count(1) >= 4
-        @status = 0
+    if @status == :alive
+      if neighbours_status.count(:alive) <= 1
+        @status = :dead
+      elsif neighbours_status.count(:alive) == 2 || neighbours_status.count(:alive) == 3
+        @status = :alive      
+      elsif neighbours_status.count(:alive) >= 4
+        @status = :dead
       end
     end
     
-    if @status == 0 && neighbours_status.count(1) == 3
-      @status = 1
+    if @status == :dead && neighbours_status.count(:alive) == 3
+      @status = :alive
     end
   end
 end

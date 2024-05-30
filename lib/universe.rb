@@ -5,11 +5,16 @@ require "cell"
 class Universe
   def initialize(seed)
     @structure = []
-
+    
+    board_universe_status_map = {
+      0 => :dead,
+      1 => :alive
+    }
+    
     seed.each do |row|
       universe_row = []
       row.each do |cell_value|
-        universe_row << Cell.new(cell_value)
+        universe_row << Cell.new(board_universe_status_map[cell_value])
       end
       @structure << universe_row
     end
@@ -35,12 +40,16 @@ class Universe
   
   def cells_status
     board = []
+    universe_board_status_map = {
+      :dead => 0,
+      :alive => 1
+    }
     
     @structure.each do |row_of_cells|
       row = []
       
       row_of_cells.each do |cell|
-        row << cell.status
+        row << universe_board_status_map[cell.status]
       end
       
       board << row
@@ -68,7 +77,7 @@ class Universe
 
   def cell_value_at_position(row_index, column_index)
     if @structure[row_index].nil? || @structure[row_index][column_index].nil?
-      return 0
+      return :dead
     end
 
     return @structure[row_index][column_index].status
