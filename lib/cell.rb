@@ -2,25 +2,28 @@
 
 class Cell
   attr_reader :status
-  attr_accessor :neighbours_status
+  attr_accessor :neighbours_statuses
+  
+  ALIVE = :alive
+  DEAD = :dead
   
   def initialize(status)
     @status = status
   end
   
   def tick
-    if @status == :alive
-      if neighbours_status.count(:alive) <= 1
-        @status = :dead
-      elsif neighbours_status.count(:alive) == 2 || neighbours_status.count(:alive) == 3
-        @status = :alive      
-      elsif neighbours_status.count(:alive) >= 4
-        @status = :dead
+    if @status == ALIVE
+      if neighbours_statuses.count(ALIVE) <= 1
+        @status = DEAD
+      elsif neighbours_statuses.count(ALIVE) == 2 || neighbours_statuses.count(ALIVE) == 3
+        @status = ALIVE      
+      elsif neighbours_statuses.count(ALIVE) >= 4
+        @status = DEAD
       end
     end
     
-    if @status == :dead && neighbours_status.count(:alive) == 3
-      @status = :alive
+    if @status == DEAD && neighbours_statuses.count(ALIVE) == 3
+      @status = ALIVE
     end
   end
 end

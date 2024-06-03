@@ -23,7 +23,7 @@ RSpec.describe "GameOfLife" do
             [0, 0, 0]
           ] 
           
-          expect(game_of_life.cells_status_board).to eq(expected_board)
+          expect(game_of_life.cells_statuses_board).to eq(expected_board)
         end
       end
     end
@@ -47,7 +47,7 @@ RSpec.describe "GameOfLife" do
             [0, 0, 0]
           ]
   
-          expect(game_of_life.cells_status_board).to eq(expected_board)
+          expect(game_of_life.cells_statuses_board).to eq(expected_board)
         end
       end
     end

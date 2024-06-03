@@ -8,8 +8,8 @@ class Universe
     @structure = []
     
     board_universe_status_map = {
-      0 => :dead,
-      1 => :alive
+      0 => Cell::DEAD,
+      1 => Cell::ALIVE
     }
     
     cells_status_board.each do |row|
@@ -21,12 +21,12 @@ class Universe
     end
   end
   
-  def assign_neighbours_status_to_cells
+  def assign_neighbours_statuses_to_cells
     @structure.each_with_index do |row, row_index|
       row.each_with_index do |cell, column_index|
-        cell_neighbours_status = neighbours_status_for_cell_at_pos(row_index, column_index)
+        cell_neighbours_status = neighbours_statuses_for_cell_at_pos(row_index, column_index)
 
-        cell.neighbours_status = cell_neighbours_status
+        cell.neighbours_statuses = cell_neighbours_status
       end
     end
   end
@@ -39,11 +39,11 @@ class Universe
     end
   end
   
-  def cells_status_board
+  def cells_statuses_board
     board = []
     universe_board_status_map = {
-      :dead => 0,
-      :alive => 1
+      Cell::DEAD => 0,
+      Cell::ALIVE => 1
     }
     
     @structure.each do |row_of_cells|
@@ -61,24 +61,24 @@ class Universe
   
   private
 
-  def neighbours_status_for_cell_at_pos(row_coordinate, column_coordinate)
-    neighbours = []
+  def neighbours_statuses_for_cell_at_pos(row_coordinate, column_coordinate)
+    neighbours_statuses = []
 
-    neighbours << cell_value_at_position(row_coordinate - 1, column_coordinate - 1)
-    neighbours << cell_value_at_position(row_coordinate - 1, column_coordinate)
-    neighbours << cell_value_at_position(row_coordinate - 1, column_coordinate + 1)
-    neighbours << cell_value_at_position(row_coordinate, column_coordinate - 1)
-    neighbours << cell_value_at_position(row_coordinate, column_coordinate + 1)
-    neighbours << cell_value_at_position(row_coordinate + 1, column_coordinate - 1)
-    neighbours << cell_value_at_position(row_coordinate + 1, column_coordinate)
-    neighbours << cell_value_at_position(row_coordinate + 1, column_coordinate + 1)
+    neighbours_statuses << cell_status_at_position(row_coordinate - 1, column_coordinate - 1)
+    neighbours_statuses << cell_status_at_position(row_coordinate - 1, column_coordinate)
+    neighbours_statuses << cell_status_at_position(row_coordinate - 1, column_coordinate + 1)
+    neighbours_statuses << cell_status_at_position(row_coordinate, column_coordinate - 1)
+    neighbours_statuses << cell_status_at_position(row_coordinate, column_coordinate + 1)
+    neighbours_statuses << cell_status_at_position(row_coordinate + 1, column_coordinate - 1)
+    neighbours_statuses << cell_status_at_position(row_coordinate + 1, column_coordinate)
+    neighbours_statuses << cell_status_at_position(row_coordinate + 1, column_coordinate + 1)
 
-    neighbours
+    neighbours_statuses
   end
 
-  def cell_value_at_position(row_index, column_index)
+  def cell_status_at_position(row_index, column_index)
     if out_of_bounds?(row_index, column_index)
-      return :dead
+      return Cell::DEAD
     end
 
     return @structure[row_index][column_index].status

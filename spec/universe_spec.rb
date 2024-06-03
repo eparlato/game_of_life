@@ -24,12 +24,12 @@ RSpec.describe Universe do
         
         universe = Universe.new(initial_cells_status_board)
         
-        universe.assign_neighbours_status_to_cells
+        universe.assign_neighbours_statuses_to_cells
         
         upper_left_cell = universe.structure[0][0]
 
-        expected_neighbours = [:dead, :dead, :dead, :dead, :dead, :dead, :dead, :alive]        
-        expect(upper_left_cell.neighbours_status).to eq(expected_neighbours)
+        expected_neighbours_statuses = [Cell::DEAD, Cell::DEAD, Cell::DEAD, Cell::DEAD, Cell::DEAD, Cell::DEAD, Cell::DEAD, Cell::ALIVE]        
+        expect(upper_left_cell.neighbours_statuses).to eq(expected_neighbours_statuses)
       end
     end  
   end

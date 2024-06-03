@@ -8,12 +8,12 @@ class GameOfLife
   end
   
   def next_gen
-    @universe.assign_neighbours_status_to_cells
+    @universe.assign_neighbours_statuses_to_cells
     
     @universe.tick
   end
   
-  def cells_status_board
-    @universe.cells_status_board
+  def cells_statuses_board
+    @universe.cells_statuses_board
   end
 end

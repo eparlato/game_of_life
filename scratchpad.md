@@ -1,1 +1,0 @@
-- use constants instead of symbols for Cell status?
